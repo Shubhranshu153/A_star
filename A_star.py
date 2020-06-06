@@ -26,11 +26,11 @@ class A_Star:
 
     #Possible Motion Available
     def motion_primitive(self):
-        return [[0,1],[1,0],[-1,0],[0,-1]]
+        return [[0,1],[1,0],[-1,0],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]
 
     # Cost of taking a Motion
     def motion_cost(self):
-        return np.array([1.0,1.0,1.0,1.0])
+        return np.array([1.0,1.0,1.0,1.0,1.4,1.4,1.4,1.4])
 
     # Calculates f=g+h
     def total_cost(self,parent_cost,motion_cost,heurestic_cost):
@@ -69,7 +69,7 @@ class A_Star:
         
         #Maps all open list nodes.To ensure we don't have duplicates in the priority queue we check this
         open_list_map={}
-        open_list_map[tuple(self.start_node)]=1
+        open_list_map[tuple(self.start_node)]=[h,counter,dict({"child_node":self.start_node,"parent_node":self.start_node,'heurestic_cost':h,'cost_to_go':0,'cost_to_go':0})]
 
         # Closed list is selected as dictionary to get O(1) searching
         closed_list= dict()
@@ -84,11 +84,12 @@ class A_Star:
 
         # Loop through priorityqueue
         while open_list:
-
+          
             node=heapq.heappop(open_list)[2]
 
             # Add the node to the closed list as we visited it
             closed_list[tuple(node['child_node'])]=dict({'parent_node':node['parent_node'],'cost':node['heurestic_cost']+node['cost_to_go'],"cost_to_go":node['cost_to_go']})
+      
             open_list_map.pop(tuple(node['child_node']),-1)
             
             #  Exit condition
@@ -120,11 +121,25 @@ class A_Star:
                     if closed_list[tuple(child)]['cost_to_go']>g:
                         closed_list[tuple(child)]=dict({'parent_node':node['child_node'],'cost':f,'cost_to_go':g})
                 else:
-                    if open_list_map.get(tuple(child),-1) ==1:
-                        continue
+                    if open_list_map.get(tuple(child),-1) !=-1:
+                        if open_list_map[tuple(child)][2]['cost_to_go']>g:
+                            # This removal is the slowest operation. Find a way to remove at O(1)
+
+                            #Exception Handling Needs a closer look
+                            try:
+                                open_list.remove(open_list_map[tuple(child)])
+                            except:
+                                pass
+                            
+                            open_list_map.pop(tuple(node['child_node']),-1)
+                            open_list_map[tuple(child)]=[f,counter,dict({"child_node":child,"parent_node":node['child_node'],"cost_to_go":g,"heurestic_cost":h})]
+                            counter=counter+1
+                            heapq.heappush(open_list,[f,counter,dict({"child_node":child,"parent_node":node['child_node'],"cost_to_go":g,"heurestic_cost":h})]);
+                        else:
+                            continue
                     else:
                         counter=counter+1
-                        open_list_map[tuple(child)]=1
+                        open_list_map[tuple(child)]=[f,counter,dict({"child_node":child,"parent_node":node['child_node'],"cost_to_go":g,"heurestic_cost":h})]
                         heapq.heappush(open_list,[f,counter,dict({"child_node":child,"parent_node":node['child_node'],"cost_to_go":g,"heurestic_cost":h})]);
                     
             imgct+=1

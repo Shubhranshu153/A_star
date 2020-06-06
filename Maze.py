@@ -18,8 +18,8 @@ def creat_map(start_node,end_node,mazeX,mazeY):
     maze = (xSize*ySize)*[0]
 
     # Set every other cell to 2, these are the starting points.
-    for i in range(0,xSize,2):
-        for j in range(0,ySize,2):
+    for i in range(0,xSize,4):
+        for j in range(0,ySize,4):
             
             maze[(j*xSize)+i]=2
 
