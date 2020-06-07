@@ -80,7 +80,7 @@ function A_Star(start, goal, h)
    
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+These instructions is to help you get started
 
 ### Prerequisites
 
@@ -89,6 +89,10 @@ These instructions will get you a copy of the project up and running on your loc
 - sympy
 - matplotlib
 
+### Utilizing
+- On executing the interface asks you for inputs to design the desired maze. The maze creation is randomized but the sparsity and size can be userdefined.
+- Start node and End node are needed to be given input and have to be even numbers.
+- Assertions are setup for error handling.
 
 ## Versioning
 - 1.0
