@@ -4,7 +4,17 @@
 This code generates a randomized maze of a specified size and given the start and goal nodes solves the maze to generate a suboptimal path using A* algorithm. The code is written to assist understanding of use of python datastructure to reduce execution time to solve a popular path planning algorithm.
 
 ## Demo
+Demo 1
+- Grid Size - 77x77
+- Start Node - 2,2
+- End Node - 28,68
 ![](Image_Demo1.gif)
+
+Demo 2
+- Grid Size - 125x125
+- Start Node - 2,2
+- End Node - 58,110
+![](Image_Demo2.gif)
 
 # Algorithm - A* 
 A* is like Dijkstra’s Algorithm in that it can be used to find a shortest path. A* is like Greedy Best-First-Search in that it can use a heuristic to guide itself.
