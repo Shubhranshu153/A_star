@@ -4,12 +4,13 @@ import Maze
 import A_star 
 import timeit 
 import numpy as np
+import pdb
 
         
-def get_astar_path(sx,sy,ex,ey,mazeX,mazeY):
+def get_astar_path(sx,sy,ex,ey,mazeX,mazeY,sparsity):
     
 
-    obs,arr=Maze.creat_map([sx,sy],[ex,ey],mazeX,mazeY)
+    obs,arr=Maze.creat_map([sx,sy],[ex,ey],mazeX,mazeY,sparsity)
     plt.plot(ex,ey,'xm')
     plt.plot(sx,sy,'xm')
 
@@ -33,6 +34,7 @@ def get_astar_path(sx,sy,ex,ey,mazeX,mazeY):
         print("timing",end_time-start_time)
 
         plt.plot(nppath[:,0],nppath[:,1],'r-')
+        plt.savefig('./frames/astar_final')
         plt.show()   
     else:
         print("path not found")
@@ -43,11 +45,18 @@ def get_astar_path(sx,sy,ex,ey,mazeX,mazeY):
 if __name__ == '__main__':
     maze_sizeX=input("Enter Maze X size. Odd values allowed: ")
     maze_sizeY=input("Enter Maze Y size. Odd values allowed: ")
+    sparsity_level=input("Sparsity level can be selected as even numbers. Ex 2,4,6...: ")
     maze_size=np.array([int(maze_sizeX),int(maze_sizeY)])
+    sparsity_level=int(sparsity_level)
 
     assert maze_size.shape==(2,),"Incorrect Shape"
     assert maze_size[0]%2 ==1, "Incorrect size value"
     assert maze_size[1]%2 ==1, "Incorrect size value"
+
+    min_size=min(maze_size[0],maze_size[1])
+    assert sparsity_level<(min_size-1), "sparsity value too high "
+    assert sparsity_level%2==0, "odd number sparsity not supported"
+    assert sparsity_level>0," sparsity level 0 or negative"
 
     startX=input("Enter start X. Even values allowed: ")
     startY=input("Enter start Y. Even values allowed: ")
@@ -66,4 +75,4 @@ if __name__ == '__main__':
     assert end_node[1]%2 ==0, "Incorrect size value"
 
 
-    get_astar_path(sx=start_node[0],sy=start_node[1],ex=end_node[0],ey=end_node[1],mazeX=maze_size[0],mazeY=maze_size[1])  
+    get_astar_path(sx=start_node[0],sy=start_node[1],ex=end_node[0],ey=end_node[1],mazeX=maze_size[0],mazeY=maze_size[1],sparsity=sparsity_level)  

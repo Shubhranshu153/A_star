@@ -2,7 +2,7 @@
 from random import randint
 import numpy as np
 
-def creat_map(start_node,end_node,mazeX,mazeY):
+def creat_map(start_node,end_node,mazeX,mazeY,sparsity):
     # Set the size of the maze.
     # These must be odd integers of 7 or above.
     xSize = mazeX
@@ -18,8 +18,8 @@ def creat_map(start_node,end_node,mazeX,mazeY):
     maze = (xSize*ySize)*[0]
 
     # Set every other cell to 2, these are the starting points.
-    for i in range(0,xSize,4):
-        for j in range(0,ySize,4):
+    for i in range(0,xSize,sparsity):
+        for j in range(0,ySize,sparsity):
             
             maze[(j*xSize)+i]=2
 

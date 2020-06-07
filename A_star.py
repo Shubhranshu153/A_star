@@ -130,7 +130,7 @@ class A_Star:
                                 open_list.remove(open_list_map[tuple(child)])
                             except:
                                 pass
-                            
+
                             open_list_map.pop(tuple(node['child_node']),-1)
                             open_list_map[tuple(child)]=[f,counter,dict({"child_node":child,"parent_node":node['child_node'],"cost_to_go":g,"heurestic_cost":h})]
                             counter=counter+1
@@ -150,4 +150,4 @@ class A_Star:
                 plt.plot(op[:,0],op[:,1],'.g')
               
                 plt.pause(0.000001)
-                plt.savefig('astar_'+str(imgct))
+                plt.savefig('./frames/astar_'+str(imgct))
