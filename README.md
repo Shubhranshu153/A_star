@@ -8,12 +8,16 @@ Demo 1
 - Grid Size - 77x77
 - Start Node - 2,2
 - End Node - 28,68
+
+
 ![](Image_Demo1.gif)
 
 Demo 2
 - Grid Size - 125x125
 - Start Node - 2,2
 - End Node - 58,110
+
+
 ![](Image_Demo2.gif)
 
 # Algorithm - A* 
