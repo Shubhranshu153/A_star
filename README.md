@@ -90,6 +90,7 @@ These instructions is to help you get started
 - matplotlib
 
 ### How To Use
+- Run Maze.py
 - On executing the interface asks you for inputs to design the desired maze. The maze creation is randomized but the sparsity and size can be userdefined.
 - Start node and End node are needed to be given input and have to be even numbers.
 - Assertions are setup for error handling.
